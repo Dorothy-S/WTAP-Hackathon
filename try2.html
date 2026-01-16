@@ -1,1 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- HTML CODE FOR CAREER ROLES SECTION -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Roles & Skills - Mentee Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .career-roles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .career-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .career-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .career-header {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 20px;
+        }
+        
+        .career-subtopic {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .career-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .skills-section {
+            padding: 25px;
+        }
+        
+        .skills-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skills-title i {
+            color: #3498db;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 15px 10px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .skill-item:hover {
+            background-color: #e3f2fd;
+            transform: translateY(-3px);
+        }
+        
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .skill-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-note {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .career-roles-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Career Paths & Skills</h1>
+            <p class="subtitle">Explore different career roles within each field. Click on any skill to view the recommended learning path and courses.</p>
+        </header>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Fields</button>
+            <button class="filter-btn" data-filter="software">Software Development</button>
+            <button class="filter-btn" data-filter="data">Data Science</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="marketing">Digital Marketing</button>
+        </div>
+        
+        <div class="career-roles-container">
+            <!-- Software Development Cards -->
+            <div class="career-card" data-field="software">
+                <div class="career-header">
+                    <div class="career-subtopic">Software Development</div>
+                    <h2 class="career-title">Backend Developer</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-code"></i> Core Skills</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/backend/python" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <div class="skill-name">Python</div>
+                        </a>
+                        <a href="/courses/backend/java" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-java"></i></div>
+                            <div class="skill-name">Java</div>
+                        </a>
+                        <a href="/courses/backend/nodejs" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <div class="skill-name">Node.js</div>
+                        </a>
+                        <a href="/courses/backend/databases" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-name">SQL/NoSQL</div>
+                        </a>
+                        <a href="/courses/backend/api" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                            <div class="skill-name">API Design</div>
+                        </a>
+                        <a href="/courses/backend/devops" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-server"></i></div>
+                            <div class="skill-name">DevOps</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-card" data-field="software">
+                <div class="career-header">
+                    <div class="career-subtopic">Software Development</div>
+                    <h2 class="career-title">Fullstack Developer</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-layer-group"></i> Key Technologies</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/fullstack/react" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-name">React</div>
+                        </a>
+                        <a href="/courses/fullstack/javascript" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                            <div class="skill-name">JavaScript</div>
+                        </a>
+                        <a href="/courses/fullstack/nodejs" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-node"></i></div>
+                            <div class="skill-name">Node.js</div>
+                        </a>
+                        <a href="/courses/fullstack/html-css" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <div class="skill-name">HTML/CSS</div>
+                        </a>
+                        <a href="/courses/fullstack/database" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-name">Databases</div>
+                        </a>
+                        <a href="/courses/fullstack/git" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                            <div class="skill-name">Git</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="career-card" data-field="software">
+                <div class="career-header">
+                    <div class="career-subtopic">Software Development</div>
+                    <h2 class="career-title">Mobile Developer</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-mobile-alt"></i> Mobile Technologies</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/mobile/swift" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-swift"></i></div>
+                            <div class="skill-name">Swift</div>
+                        </a>
+                        <a href="/courses/mobile/kotlin" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-mobile"></i></div>
+                            <div class="skill-name">Kotlin</div>
+                        </a>
+                        <a href="/courses/mobile/react-native" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-name">React Native</div>
+                        </a>
+                        <a href="/courses/mobile/flutter" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="skill-name">Flutter</div>
+                        </a>
+                        <a href="/courses/mobile/android" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-android"></i></div>
+                            <div class="skill-name">Android</div>
+                        </a>
+                        <a href="/courses/mobile/ios" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-apple"></i></div>
+                            <div class="skill-name">iOS</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Science Cards -->
+            <div class="career-card" data-field="data">
+                <div class="career-header">
+                    <div class="career-subtopic">Data Science</div>
+                    <h2 class="career-title">Data Analyst</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-chart-bar"></i> Analytical Skills</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/data-analyst/python" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <div class="skill-name">Python</div>
+                        </a>
+                        <a href="/courses/data-analyst/sql" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <div class="skill-name">SQL</div>
+                        </a>
+                        <a href="/courses/data-analyst/excel" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-file-excel"></i></div>
+                            <div class="skill-name">Excel</div>
+                        </a>
+                        <a href="/courses/data-analyst/tableau" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="skill-name">Tableau</div>
+                        </a>
+                        <a href="/courses/data-analyst/statistics" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                            <div class="skill-name">Statistics</div>
+                        </a>
+                        <a href="/courses/data-analyst/powerbi" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-chart-bar"></i></div>
+                            <div class="skill-name">Power BI</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design Cards -->
+            <div class="career-card" data-field="design">
+                <div class="career-header">
+                    <div class="career-subtopic">Design</div>
+                    <h2 class="career-title">UI/UX Designer</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-palette"></i> Design Tools</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/ui-ux/figma" class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-figma"></i></div>
+                            <div class="skill-name">Figma</div>
+                        </a>
+                        <a href="/courses/ui-ux/adobe-xd" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
+                            <div class="skill-name">Adobe XD</div>
+                        </a>
+                        <a href="/courses/ui-ux/sketch" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-drafting-compass"></i></div>
+                            <div class="skill-name">Sketch</div>
+                        </a>
+                        <a href="/courses/ui-ux/wireframing" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-object-group"></i></div>
+                            <div class="skill-name">Wireframing</div>
+                        </a>
+                        <a href="/courses/ui-ux/prototyping" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-mouse-pointer"></i></div>
+                            <div class="skill-name">Prototyping</div>
+                        </a>
+                        <a href="/courses/ui-ux/user-research" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-users"></i></div>
+                            <div class="skill-name">User Research</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Marketing Cards -->
+            <div class="career-card" data-field="marketing">
+                <div class="career-header">
+                    <div class="career-subtopic">Digital Marketing</div>
+                    <h2 class="career-title">SEO Specialist</h2>
+                </div>
+                <div class="skills-section">
+                    <h3 class="skills-title"><i class="fas fa-search"></i> SEO Skills</h3>
+                    <div class="skills-grid">
+                        <a href="/courses/seo/keyword-research" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-key"></i></div>
+                            <div class="skill-name">Keyword Research</div>
+                        </a>
+                        <a href="/courses/seo/technical-seo" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-tools"></i></div>
+                            <div class="skill-name">Technical SEO</div>
+                        </a>
+                        <a href="/courses/seo/analytics" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="skill-name">Google Analytics</div>
+                        </a>
+                        <a href="/courses/seo/content-seo" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-edit"></i></div>
+                            <div class="skill-name">Content SEO</div>
+                        </a>
+                        <a href="/courses/seo/backlinks" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-link"></i></div>
+                            <div class="skill-name">Link Building</div>
+                        </a>
+                        <a href="/courses/seo/local-seo" class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="skill-name">Local SEO</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p>Click on any skill icon to explore the learning path with courses, projects, and mentorship opportunities.</p>
+            <p>Need help choosing a path? <a href="#" style="color: #3498db; text-decoration: none;">Talk to a career advisor</a></p>
+        </div>
+    </div>
 
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const careerCards = document.querySelectorAll('.career-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide career cards based on filter
+                    let visibleCards = 0;
+                    
+                    careerCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-field') === filterValue) {
+                            card.style.display = 'block';
+                            visibleCards++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show no results message if no cards are visible
+                    let noResultsMessage = document.querySelector('.no-results');
+                    
+                    if (visibleCards === 0) {
+                        if (!noResultsMessage) {
+                            noResultsMessage = document.createElement('div');
+                            noResultsMessage.className = 'no-results';
+                            noResultsMessage.innerHTML = `
+                                <i class="fas fa-search"></i>
+                                <p>No career paths found for this category. Check back soon for more options!</p>
+                            `;
+                            document.querySelector('.career-roles-container').appendChild(noResultsMessage);
+                        }
+                    } else if (noResultsMessage) {
+                        noResultsMessage.remove();
+                    }
+                });
+            });
+            
+            // Add hover effect to skill items
+            const skillItems = document.querySelectorAll('.skill-item');
+            
+            skillItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 5px 15px rgba(52, 152, 219, 0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Simulate course path navigation
+            skillItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const skillName = this.querySelector('.skill-name').textContent;
+                    const field = this.closest('.career-card').querySelector('.career-subtopic').textContent;
+                    const role = this.closest('.career-card').querySelector('.career-title').textContent;
+                    
+                    // In a real application, this would navigate to the course page
+                    // For this demo, we'll show an alert
+                    alert(`Navigating to courses for: ${skillName}\nField: ${field}\nRole: ${role}\n\nIn a real application, this would take you to the learning path for this skill.`);
+                    
+                    // You could also use:
+                    // window.location.href = this.getAttribute('href');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
