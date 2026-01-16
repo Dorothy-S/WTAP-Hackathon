@@ -34,6 +34,7 @@
             font-size: 2.5rem;
             color: #2d3436;
             margin-bottom: 10px;
+            cursor: pointer;
         }
         
         .logo i {
@@ -187,13 +188,196 @@
             font-size: 0.9rem;
         }
         
+        /* Mentor Listing Page Styles */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #dfe6e9;
+        }
+        
+        .back-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        .selected-specialty {
+            font-size: 2.2rem;
+            color: #2d3436;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        .login-prompt {
+            background: #fff9e6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            max-width: 800px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 2px solid #ffd166;
+        }
+        
+        .login-prompt h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .login-prompt p {
+            color: #636e72;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .login-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .login-btn:hover {
+            background: #5a4fcf;
+            transform: scale(1.05);
+        }
+        
+        /* Mentor Cards */
+        .mentors-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mentor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .mentor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .mentor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .mentor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #6c5ce7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .mentor-info h3 {
+            font-size: 1.5rem;
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-title {
+            color: #6c5ce7;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-experience {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        .mentor-expertise {
+            margin-bottom: 20px;
+        }
+        
+        .mentor-expertise h4 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #f1f3f9;
+            color: #6c5ce7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .mentor-bio {
+            color: #636e72;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .view-profile-btn {
+            background: transparent;
+            color: #6c5ce7;
+            border: 2px solid #6c5ce7;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-weight: 600;
+        }
+        
+        .view-profile-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.2rem;
             }
             
-            .specializations {
+            .specializations, .mentors-list {
                 grid-template-columns: 1fr;
             }
             
@@ -204,13 +388,22 @@
             .stat-number {
                 font-size: 2rem;
             }
+            
+            .page-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .selected-specialty {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="home-page">
         <header>
-            <div class="logo">
+            <div class="logo" onclick="goToHome()">
                 <i class="fas fa-hands-helping"></i> Tech Mentor
             </div>
             <h1>Find Your Perfect Tech Mentor</h1>
@@ -237,7 +430,7 @@
             
             <div class="specializations">
                 <!-- Cybersecurity Card -->
-                <div class="specialty-card" onclick="selectSpecialty('cybersecurity')">
+                <div class="specialty-card" onclick="showMentors('cybersecurity')">
                     <div class="specialty-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -250,7 +443,7 @@
                 </div>
                 
                 <!-- Software Development Card -->
-                <div class="specialty-card" onclick="selectSpecialty('software-dev')">
+                <div class="specialty-card" onclick="showMentors('software-dev')">
                     <div class="specialty-icon">
                         <i class="fas fa-code"></i>
                     </div>
@@ -263,7 +456,7 @@
                 </div>
                 
                 <!-- Data Science Card -->
-                <div class="specialty-card" onclick="selectSpecialty('data-science')">
+                <div class="specialty-card" onclick="showMentors('data-science')">
                     <div class="specialty-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -273,45 +466,6 @@
                         and AI from industry data scientists.
                     </p>
                     <span class="mentor-count">36 mentors available</span>
-                </div>
-                
-                <!-- Cloud Computing Card -->
-                <div class="specialty-card" onclick="selectSpecialty('cloud-computing')">
-                    <div class="specialty-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3 class="specialty-title">Cloud Computing</h3>
-                    <p class="specialty-desc">
-                        Learn AWS, Azure, Google Cloud, DevOps, and cloud architecture 
-                        from certified professionals.
-                    </p>
-                    <span class="mentor-count">28 mentors available</span>
-                </div>
-                
-                <!-- UI/UX Design Card -->
-                <div class="specialty-card" onclick="selectSpecialty('ui-ux')">
-                    <div class="specialty-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3 class="specialty-title">UI/UX Design</h3>
-                    <p class="specialty-desc">
-                        Master user experience, interface design, prototyping, 
-                        and design thinking with creative experts.
-                    </p>
-                    <span class="mentor-count">31 mentors available</span>
-                </div>
-                
-                <!-- DevOps Card -->
-                <div class="specialty-card" onclick="selectSpecialty('devops')">
-                    <div class="specialty-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="specialty-title">DevOps</h3>
-                    <p class="specialty-desc">
-                        Learn CI/CD, containerization, infrastructure as code, 
-                        and automation from DevOps engineers.
-                    </p>
-                    <span class="mentor-count">24 mentors available</span>
                 </div>
             </div>
             
@@ -336,37 +490,210 @@
         </footer>
     </div>
 
+    <!-- Mentor Listing Page (Hidden by default) -->
+    <div class="container" id="mentors-page" style="display: none;">
+        <div class="page-header">
+            <button class="back-btn" onclick="goToHome()">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+            <h2 class="selected-specialty" id="specialty-title">Cybersecurity Mentors</h2>
+        </div>
+        
+        <p style="color: #636e72; text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
+            Here are a few cybersecurity mentors. Login to see all mentors and connect with them.
+        </p>
+        
+        <div class="mentors-list" id="mentors-container">
+            <!-- Mentor cards will be dynamically added here -->
+        </div>
+        
+        <div class="login-prompt">
+            <h3>Want to see all mentors and connect?</h3>
+            <p>Login to view complete mentor profiles, schedule sessions, and send messages to mentors.</p>
+            <button class="login-btn" onclick="showLogin()">
+                <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+            </button>
+        </div>
+    </div>
+
     <script>
-        function selectSpecialty(specialty) {
-            // This function would normally redirect to a mentors listing page
-            // or filter mentors based on the selected specialty
-            alert(`Loading mentors for ${specialty.replace('-', ' ')}...`);
+        // Store mentor data for different specialties
+        const mentorsData = {
+            'cybersecurity': [
+                {
+                    name: "Alex Morgan",
+                    title: "Senior Security Architect",
+                    experience: "10+ years in cybersecurity",
+                    expertise: ["Ethical Hacking", "Network Security", "Threat Analysis", "Incident Response"],
+                    bio: "I specialize in building secure systems and teaching others how to identify vulnerabilities. I've worked with Fortune 500 companies to secure their infrastructure.",
+                    color: "#6c5ce7"
+                },
+                {
+                    name: "Sarah Chen",
+                    title: "Cybersecurity Consultant",
+                    experience: "8 years in security consulting",
+                    expertise: ["Penetration Testing", "Security Audits", "Compliance", "Cloud Security"],
+                    bio: "I help companies strengthen their security posture through comprehensive audits and hands-on training. I love mentoring newcomers to cybersecurity.",
+                    color: "#00b894"
+                },
+                {
+                    name: "Marcus Johnson",
+                    title: "CISO at TechSecure",
+                    experience: "15+ years leadership experience",
+                    expertise: ["Security Strategy", "Risk Management", "Team Leadership", "Governance"],
+                    bio: "I mentor aspiring cybersecurity leaders on strategy, risk management, and building effective security programs within organizations.",
+                    color: "#fd79a8"
+                }
+            ],
+            'software-dev': [
+                {
+                    name: "Jamie Wilson",
+                    title: "Lead Full-Stack Developer",
+                    experience: "12 years in software development",
+                    expertise: ["React/Node.js", "Microservices", "AWS", "Agile Methodology"],
+                    bio: "I've built scalable applications for startups and enterprises. I enjoy helping developers transition from junior to senior roles.",
+                    color: "#0984e3"
+                },
+                {
+                    name: "Priya Sharma",
+                    title: "Mobile App Developer",
+                    experience: "7 years in mobile development",
+                    expertise: ["iOS Development", "React Native", "UI/UX", "App Store Optimization"],
+                    bio: "I specialize in creating beautiful, functional mobile apps. I mentor developers on mobile best practices and career growth.",
+                    color: "#e17055"
+                },
+                {
+                    name: "David Kim",
+                    title: "Software Architect",
+                    experience: "14 years in software architecture",
+                    expertise: ["System Design", "Scalability", "DevOps", "Code Reviews"],
+                    bio: "I focus on helping developers understand software architecture principles and design scalable systems.",
+                    color: "#00cec9"
+                }
+            ],
+            'data-science': [
+                {
+                    name: "Elena Rodriguez",
+                    title: "Data Science Lead",
+                    experience: "9 years in data science",
+                    expertise: ["Machine Learning", "Python/R", "Data Visualization", "A/B Testing"],
+                    bio: "I build predictive models and help businesses make data-driven decisions. I mentor aspiring data scientists on real-world projects.",
+                    color: "#a29bfe"
+                },
+                {
+                    name: "Thomas Wright",
+                    title: "ML Engineer",
+                    experience: "6 years in machine learning",
+                    expertise: ["Deep Learning", "NLP", "Computer Vision", "MLOps"],
+                    bio: "I specialize in deploying machine learning models to production. I mentor on the practical aspects of ML engineering.",
+                    color: "#fab1a0"
+                },
+                {
+                    name: "Lisa Park",
+                    title: "Data Analytics Director",
+                    experience: "11 years in analytics",
+                    expertise: ["Business Intelligence", "SQL", "Tableau", "Statistical Analysis"],
+                    bio: "I help organizations derive insights from their data. I mentor analysts on storytelling with data and career advancement.",
+                    color: "#74b9ff"
+                }
+            ]
+        };
+        
+        // Specialty titles mapping
+        const specialtyTitles = {
+            'cybersecurity': 'Cybersecurity',
+            'software-dev': 'Software Development',
+            'data-science': 'Data Science'
+        };
+        
+        // Function to show mentors for a selected specialty
+        function showMentors(specialty) {
+            // Hide home page, show mentors page
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'block';
             
-            // In a real app, you would redirect or filter content
-            // window.location.href = `/mentors?specialty=${specialty}`;
+            // Set the specialty title
+            document.getElementById('specialty-title').textContent = `${specialtyTitles[specialty]} Mentors`;
             
-            // For demo, we'll just highlight the selected card
-            const cards = document.querySelectorAll('.specialty-card');
-            cards.forEach(card => card.style.borderColor = 'transparent');
+            // Get the mentors container
+            const mentorsContainer = document.getElementById('mentors-container');
+            mentorsContainer.innerHTML = '';
             
-            event.currentTarget.style.borderColor = '#6c5ce7';
+            // Get mentors for this specialty
+            const mentors = mentorsData[specialty] || [];
+            
+            // Create mentor cards
+            mentors.forEach((mentor, index) => {
+                const mentorCard = document.createElement('div');
+                mentorCard.className = 'mentor-card';
+                
+                // Create expertise tags HTML
+                const expertiseTags = mentor.expertise.map(skill => 
+                    `<span class="tag">${skill}</span>`
+                ).join('');
+                
+                mentorCard.innerHTML = `
+                    <div class="mentor-header">
+                        <div class="mentor-avatar" style="background: ${mentor.color}">
+                            ${mentor.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div class="mentor-info">
+                            <h3>${mentor.name}</h3>
+                            <div class="mentor-title">${mentor.title}</div>
+                            <div class="mentor-experience">${mentor.experience}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-expertise">
+                        <h4>Areas of Expertise</h4>
+                        <div class="expertise-tags">
+                            ${expertiseTags}
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-bio">
+                        <p>${mentor.bio}</p>
+                    </div>
+                    
+                    <button class="view-profile-btn" onclick="showLogin()">
+                        <i class="fas fa-user-circle"></i> View Full Profile (Login Required)
+                    </button>
+                `;
+                
+                mentorsContainer.appendChild(mentorCard);
+            });
         }
         
-        // Add event listener for the search button
+        // Function to go back to home page
+        function goToHome() {
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('mentors-page').style.display = 'none';
+        }
+        
+        // Function to show login (demo)
+        function showLogin() {
+            alert("Login/Signup form would appear here.\n\nIn a real app, this would open a login modal or redirect to login page.");
+        }
+        
+        // Search functionality
         document.querySelector('.search-btn').addEventListener('click', function() {
             const query = document.querySelector('.search-box input').value;
             if (query.trim()) {
-                alert(`Searching for: "${query}"`);
-                // In real app: window.location.href = `/search?q=${encodeURIComponent(query)}`;
+                alert(`Searching for mentors with: "${query}"\n\nIn a real app, this would filter mentors based on search query.`);
             }
         });
         
-        // Allow pressing Enter in search box
         document.querySelector('.search-box input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 document.querySelector('.search-btn').click();
             }
         });
+        
+        // Initialize with home page
+        window.onload = function() {
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('mentors-page').style.display = 'none';
+        };
     </script>
 </body>
 </html>
