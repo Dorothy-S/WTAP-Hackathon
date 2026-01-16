@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Mentor - Find Your Mentor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            color: #6c5ce7;
+        }
+        
+        h1 {
+            color: #2d3436;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .tagline {
+            color: #636e72;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Specialization Grid */
+        .specializations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .specialty-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            border-color: #6c5ce7;
+        }
+        
+        .specialty-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #6c5ce7;
+        }
+        
+        .specialty-title {
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .specialty-desc {
+            color: #636e72;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .mentor-count {
+            display: inline-block;
+            background: #dfe6e9;
+            color: #2d3436;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            outline: none;
+        }
+        
+        .search-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            width: 60px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6c5ce7;
+        }
+        
+        .stat-label {
+            color: #636e72;
+            margin-top: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #636e72;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .specializations {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i> Tech Mentor
+            </div>
+            <h1>Find Your Perfect Tech Mentor</h1>
+            <p class="tagline">
+                Connect with experienced mentors in various tech specialties. 
+                Get personalized guidance to advance your career and skills.
+            </p>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for mentors, topics, or skills...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <h2 style="color: #2d3436; margin-bottom: 10px;">Choose Your Specialization</h2>
+            <p style="color: #636e72; margin-bottom: 30px; text-align: center;">
+                Select a tech field to find specialized mentors
+            </p>
+            
+            <div class="specializations">
+                <!-- Cybersecurity Card -->
+                <div class="specialty-card" onclick="selectSpecialty('cybersecurity')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="specialty-title">Cybersecurity</h3>
+                    <p class="specialty-desc">
+                        Learn from security experts about ethical hacking, network security, 
+                        threat analysis, and digital forensics.
+                    </p>
+                    <span class="mentor-count">42 mentors available</span>
+                </div>
+                
+                <!-- Software Development Card -->
+                <div class="specialty-card" onclick="selectSpecialty('software-dev')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="specialty-title">Software Development</h3>
+                    <p class="specialty-desc">
+                        Master full-stack development, mobile apps, web technologies, 
+                        and software architecture with experienced developers.
+                    </p>
+                    <span class="mentor-count">85 mentors available</span>
+                </div>
+                
+                <!-- Data Science Card -->
+                <div class="specialty-card" onclick="selectSpecialty('data-science')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="specialty-title">Data Science</h3>
+                    <p class="specialty-desc">
+                        Get guidance on machine learning, data analysis, visualization, 
+                        and AI from industry data scientists.
+                    </p>
+                    <span class="mentor-count">36 mentors available</span>
+                </div>
+                
+                <!-- Cloud Computing Card -->
+                <div class="specialty-card" onclick="selectSpecialty('cloud-computing')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="specialty-title">Cloud Computing</h3>
+                    <p class="specialty-desc">
+                        Learn AWS, Azure, Google Cloud, DevOps, and cloud architecture 
+                        from certified professionals.
+                    </p>
+                    <span class="mentor-count">28 mentors available</span>
+                </div>
+                
+                <!-- UI/UX Design Card -->
+                <div class="specialty-card" onclick="selectSpecialty('ui-ux')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="specialty-title">UI/UX Design</h3>
+                    <p class="specialty-desc">
+                        Master user experience, interface design, prototyping, 
+                        and design thinking with creative experts.
+                    </p>
+                    <span class="mentor-count">31 mentors available</span>
+                </div>
+                
+                <!-- DevOps Card -->
+                <div class="specialty-card" onclick="selectSpecialty('devops')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="specialty-title">DevOps</h3>
+                    <p class="specialty-desc">
+                        Learn CI/CD, containerization, infrastructure as code, 
+                        and automation from DevOps engineers.
+                    </p>
+                    <span class="mentor-count">24 mentors available</span>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Expert Mentors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Tech Specialties</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Successful Mentees</div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Tech Mentor App &copy; 2023 | Connecting tech professionals with aspiring talents</p>
+        </footer>
+    </div>
+
+    <script>
+        function selectSpecialty(specialty) {
+            // This function would normally redirect to a mentors listing page
+            // or filter mentors based on the selected specialty
+            alert(`Loading mentors for ${specialty.replace('-', ' ')}...`);
+            
+            // In a real app, you would redirect or filter content
+            // window.location.href = `/mentors?specialty=${specialty}`;
+            
+            // For demo, we'll just highlight the selected card
+            const cards = document.querySelectorAll('.specialty-card');
+            cards.forEach(card => card.style.borderColor = 'transparent');
+            
+            event.currentTarget.style.borderColor = '#6c5ce7';
+        }
+        
+        // Add event listener for the search button
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.querySelector('.search-box input').value;
+            if (query.trim()) {
+                alert(`Searching for: "${query}"`);
+                // In real app: window.location.href = `/search?q=${encodeURIComponent(query)}`;
+            }
+        });
+        
+        // Allow pressing Enter in search box
+        document.querySelector('.search-box input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+</body>
+</html>
