@@ -1,0 +1,8 @@
+{
+  "rsaini": {
+    "name": "Ramandeep Saini",
+    "username": "rsaini",
+    "password": "scrypt:32768:8:1$NLNUzsrkPLWyI95W$6494d8f739b7e9c9d1ac5726511d4c3dea5e7442dfeb72931bee4032543ec76c184d0fd6596ed08b16f9886bbaed24c53c866c0d32f18230154e278ff6ea42df",
+    "type": "mentee"
+  }
+}

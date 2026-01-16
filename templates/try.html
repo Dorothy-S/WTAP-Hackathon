@@ -670,9 +670,16 @@
             document.getElementById('mentors-page').style.display = 'none';
         }
         
-        // Function to show login (demo)
+        // Function to show login
         function showLogin() {
-            alert("Login/Signup form would appear here.\n\nIn a real app, this would open a login modal or redirect to login page.");
+            // Redirect to login page
+            window.location.href = '/login';
+        }
+
+        // Update the showMentors function to redirect to Flask route
+        function showMentors(specialty) {
+            // Redirect to Flask route which will handle login check
+            window.location.href = `/mentors/${specialty}`;
         }
         
         // Search functionality
