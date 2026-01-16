@@ -1,4 +1,4 @@
-PITCH:
+PITCH: https://www.canva.com/design/DAG-mnnm-t8/1kEa02OGfVP847uGjIhszw/edit?utm_content=DAG-mnnm-t8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 MENTEES:
 - Priorities: career path exploration, recommendations, advice from top professionals, extra learning resources, networking
