@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Mentor - Find Your Mentor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #2d3436;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .logo i {
+            color: #6c5ce7;
+        }
+        
+        h1 {
+            color: #2d3436;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .tagline {
+            color: #636e72;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Specialization Grid */
+        .specializations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 30px;
+        }
+        
+        .specialty-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            border-color: #6c5ce7;
+        }
+        
+        .specialty-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #6c5ce7;
+        }
+        
+        .specialty-title {
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .specialty-desc {
+            color: #636e72;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .mentor-count {
+            display: inline-block;
+            background: #dfe6e9;
+            color: #2d3436;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 20px 25px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            outline: none;
+        }
+        
+        .search-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            width: 60px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6c5ce7;
+        }
+        
+        .stat-label {
+            color: #636e72;
+            margin-top: 5px;
+        }
+        
+        /* Projects Showcase Section */
+        .projects-showcase {
+            width: 100%;
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #2d3436;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #636e72;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            border-color: #6c5ce7;
+        }
+        
+        .project-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #f1f3f9;
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            color: #2d3436;
+            margin-bottom: 8px;
+        }
+        
+        .project-author {
+            color: #6c5ce7;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .tech-tag {
+            background: #f1f3f9;
+            color: #6c5ce7;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .project-description {
+            padding: 20px 25px;
+            color: #636e72;
+            line-height: 1.5;
+            border-bottom: 1px solid #f1f3f9;
+        }
+        
+        .code-preview {
+            padding: 20px 25px;
+            border-bottom: 1px solid #f1f3f9;
+        }
+        
+        .code-preview h4 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            max-height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .full-code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        .code-line {
+            margin-bottom: 5px;
+        }
+        
+        .code-comment {
+            color: #81ecec;
+        }
+        
+        .code-keyword {
+            color: #fd79a8;
+        }
+        
+        .code-string {
+            color: #55efc4;
+        }
+        
+        .feedback-section {
+            padding: 20px 25px;
+        }
+        
+        .feedback-section h4 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .feedback-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #6c5ce7;
+        }
+        
+        .feedback-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .feedback-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #6c5ce7;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .feedback-mentor {
+            font-weight: 600;
+            color: #2d3436;
+        }
+        
+        .feedback-text {
+            color: #636e72;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .view-more-btn {
+            display: block;
+            margin: 30px auto 0;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .view-more-btn:hover {
+            background: #5a4fcf;
+            transform: scale(1.05);
+        }
+        
+        .login-required-note {
+            text-align: center;
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #ffd166;
+            color: #636e72;
+        }
+        
+        .login-required-note i {
+            color: #6c5ce7;
+            margin-right: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #636e72;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 40px;
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #5a4fcf;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        /* Pre-Login Page Styles */
+        .pre-login-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .pre-login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .role-selection {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .role-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 3px solid transparent;
+        }
+        
+        .role-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: #6c5ce7;
+        }
+        
+        .role-card.selected {
+            border-color: #6c5ce7;
+            background: #f8f9ff;
+        }
+        
+        .role-icon {
+            font-size: 3.5rem;
+            color: #6c5ce7;
+            margin-bottom: 20px;
+        }
+        
+        .role-title {
+            font-size: 1.8rem;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+        
+        .role-desc {
+            color: #636e72;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .role-features {
+            text-align: left;
+            margin-top: 20px;
+            color: #636e72;
+        }
+        
+        .role-features li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+        
+        .continue-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+            display: inline-block;
+        }
+        
+        .continue-btn:hover {
+            background: #5a4fcf;
+            transform: scale(1.05);
+        }
+        
+        .continue-btn:disabled {
+            background: #b2bec3;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .back-btn {
+            background: transparent;
+            color: #636e72;
+            border: 2px solid #dfe6e9;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: #f1f3f9;
+        }
+        
+        /* Login Page Styles */
+        .login-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-title {
+            text-align: center;
+            color: #2d3436;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .login-subtitle {
+            text-align: center;
+            color: #636e72;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d3436;
+            font-weight: 600;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .form-btn {
+            width: 100%;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .form-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+            color: #636e72;
+        }
+        
+        .login-links a {
+            color: #6c5ce7;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #6c5ce7;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .user-details h3 {
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+        
+        .user-details p {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            background: #f1f3f9;
+            color: #2d3436;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+        
+        .nav-btn.active {
+            background: #6c5ce7;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #ff7675;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #e66767;
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .dashboard-card h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Mentee Dashboard Specific */
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .stat-box .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6c5ce7;
+            margin-bottom: 5px;
+        }
+        
+        .stat-box .label {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        /* Mentor Dashboard Specific */
+        .pending-projects {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .project-request {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .project-request:hover {
+            background: #f1f3f9;
+        }
+        
+        .project-info h4 {
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+        
+        .project-info p {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .review-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .review-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        /* Mentor Listing Page Styles */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #dfe6e9;
+        }
+        
+        .selected-specialty {
+            font-size: 2.2rem;
+            color: #2d3436;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        .login-prompt {
+            background: #fff9e6;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            max-width: 800px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 2px solid #ffd166;
+        }
+        
+        .login-prompt h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .login-prompt p {
+            color: #636e72;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        /* Mentor Cards */
+        .mentors-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mentor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .mentor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .mentor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .mentor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #6c5ce7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .mentor-info h3 {
+            font-size: 1.5rem;
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-title {
+            color: #6c5ce7;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-experience {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        
+        .mentor-expertise {
+            margin-bottom: 20px;
+        }
+        
+        .mentor-expertise h4 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: #f1f3f9;
+            color: #6c5ce7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .mentor-bio {
+            color: #636e72;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .view-profile-btn {
+            background: transparent;
+            color: #6c5ce7;
+            border: 2px solid #6c5ce7;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-weight: 600;
+        }
+        
+        .view-profile-btn:hover {
+            background: #6c5ce7;
+            color: white;
+        }
+        
+        /* Comment Section */
+        .comment-section {
+            margin-top: 30px;
+        }
+        
+        .comment-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            min-height: 100px;
+        }
+        
+        .submit-comment-btn {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .submit-comment-btn:hover {
+            background: #5a4fcf;
+        }
+        
+        /* Feedback Form */
+        .feedback-form {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .feedback-textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dfe6e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            min-height: 150px;
+            margin-bottom: 20px;
+        }
+        
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .star {
+            color: #ffd32a;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .specializations, .mentors-list, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .selected-specialty {
+                font-size: 1.8rem;
+            }
+            
+            .role-selection {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .role-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .pre-login-card, .login-card {
+                padding: 30px 20px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .dashboard-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-request {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Page -->
+    <div class="container" id="home-page">
+        <header>
+            <div class="logo" onclick="goToHome()">
+                <i class="fas fa-hands-helping"></i> Tech Mentor
+            </div>
+            <h1>Find Your Perfect Tech Mentor</h1>
+            <p class="tagline">
+                Connect with experienced mentors in various tech specialties. 
+                Get personalized guidance to advance your career and skills.
+            </p>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for mentors, topics, or skills...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <h2 style="color: #2d3436; margin-bottom: 10px;">Choose Your Specialization</h2>
+            <p style="color: #636e72; margin-bottom: 30px; text-align: center;">
+                Select a tech field to find specialized mentors
+            </p>
+            
+            <div class="specializations">
+                <!-- Cybersecurity Card -->
+                <div class="specialty-card" onclick="showMentors('cybersecurity')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="specialty-title">Cybersecurity</h3>
+                    <p class="specialty-desc">
+                        Learn from security experts about ethical hacking, network security, 
+                        threat analysis, and digital forensics.
+                    </p>
+                    <span class="mentor-count">42 mentors available</span>
+                </div>
+                
+                <!-- Software Development Card -->
+                <div class="specialty-card" onclick="showMentors('software-dev')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="specialty-title">Software Development</h3>
+                    <p class="specialty-desc">
+                        Master full-stack development, mobile apps, web technologies, 
+                        and software architecture with experienced developers.
+                    </p>
+                    <span class="mentor-count">85 mentors available</span>
+                </div>
+                
+                <!-- Data Science Card -->
+                <div class="specialty-card" onclick="showMentors('data-science')">
+                    <div class="specialty-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="specialty-title">Data Science</h3>
+                    <p class="specialty-desc">
+                        Get guidance on machine learning, data analysis, visualization, 
+                        and AI from industry data scientists.
+                    </p>
+                    <span class="mentor-count">36 mentors available</span>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Expert Mentors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Tech Specialties</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Successful Mentees</div>
+                </div>
+            </div>
+            
+            <!-- Projects Showcase Section -->
+            <section class="projects-showcase">
+                <h2 class="section-title">Community Projects Showcase</h2>
+                <p class="section-subtitle">
+                    See real projects from our community with mentor feedback. 
+                    Get inspired and see how mentors help improve code quality and design.
+                </p>
+                
+                <div class="projects-grid" id="projects-container">
+                    <!-- Project cards will be dynamically added here -->
+                </div>
+                
+                <div class="login-required-note">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Without logging in, you can see partial code and one feedback per project. 
+                    Login to view full code, all feedback, and submit your own projects for mentorship.
+                </div>
+                
+                <button class="cta-button" onclick="showPreLoginPage()">
+                    <i class="fas fa-sign-in-alt"></i> Get Started - Join Now
+                </button>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Tech Mentor App &copy; 2023 | Connecting tech professionals with aspiring talents</p>
+        </footer>
+    </div>
+
+    <!-- Pre-Login Role Selection Page -->
+    <div class="container" id="pre-login-page" style="display: none;">
+        <div class="pre-login-container">
+            <div class="pre-login-card">
+                <h1 style="color: #2d3436; margin-bottom: 15px;">Welcome to Tech Mentor</h1>
+                <p class="tagline" style="margin-bottom: 40px;">
+                    Join our community of tech professionals and learners. Select your role to get started.
+                </p>
+                
+                <div class="role-selection">
+                    <!-- Mentee Role Card -->
+                    <div class="role-card" id="mentee-role-card" onclick="selectRole('mentee')">
+                        <div class="role-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="role-title">Join as Mentee</h3>
+                        <p class="role-desc">
+                            I want to learn, grow my skills, and get guidance from experienced professionals.
+                        </p>
+                        <div class="role-features">
+                            <p style="font-weight: 600; color: #2d3436; margin-bottom: 10px;">As a mentee you can:</p>
+                            <ul style="padding-left: 20px;">
+                                <li>Connect with expert mentors</li>
+                                <li>Get personalized feedback on projects</li>
+                                <li>Schedule 1:1 mentorship sessions</li>
+                                <li>Join specialized learning paths</li>
+                                <li>Build your tech portfolio</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Mentor Role Card -->
+                    <div class="role-card" id="mentor-role-card" onclick="selectRole('mentor')">
+                        <div class="role-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="role-title">Join as Mentor</h3>
+                        <p class="role-desc">
+                            I want to share my expertise, guide others, and contribute to the tech community.
+                        </p>
+                        <div class="role-features">
+                            <p style="font-weight: 600; color: #2d3436; margin-bottom: 10px;">As a mentor you can:</p>
+                            <ul style="padding-left: 20px;">
+                                <li>Help aspiring tech professionals</li>
+                                <li>Review and provide feedback on projects</li>
+                                <li>Share your industry expertise</li>
+                                <li>Build your mentoring portfolio</li>
+                                <li>Join our mentor community</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="continue-btn" id="continue-btn" onclick="goToLoginPage()" disabled>
+                    Continue
+                </button>
+                
+                <div>
+                    <button class="back-btn" onclick="goToHome()">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div class="container" id="login-page" style="display: none;">
+        <div class="login-container">
+            <div class="login-card">
+                <h2 class="login-title" id="login-page-title">Join as Mentee</h2>
+                <p class="login-subtitle" id="login-page-subtitle">Create your account to start your learning journey</p>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="full-name">Full Name</label>
+                        <input type="text" id="full-name" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    
+                    <!-- Mentee Specific Fields -->
+                    <div class="form-group" id="mentee-fields">
+                        <label class="form-label" for="interests">What are your primary interests? (Select up to 3)</label>
+                        <select id="interests" class="form-select" multiple style="height: 120px;">
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="frontend-dev">Frontend Development</option>
+                            <option value="backend-dev">Backend Development</option>
+                            <option value="data-science">Data Science & AI</option>
+                            <option value="mobile-dev">Mobile Development</option>
+                            <option value="cloud-devops">Cloud & DevOps</option>
+                            <option value="ui-ux">UI/UX Design</option>
+                            <option value="software-arch">Software Architecture</option>
+                        </select>
+                        <small style="color: #636e72;">Hold Ctrl/Cmd to select multiple</small>
+                        
+                        <label class="form-label" for="experience-level" style="margin-top: 15px;">Current Experience Level</label>
+                        <select id="experience-level" class="form-select">
+                            <option value="">Select your level</option>
+                            <option value="beginner">Beginner (0-1 years)</option>
+                            <option value="intermediate">Intermediate (1-3 years)</option>
+                            <option value="advanced">Advanced (3+ years)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mentor Specific Fields -->
+                    <div class="form-group" id="mentor-fields" style="display: none;">
+                        <label class="form-label" for="expertise">Your Expertise Areas (Select up to 5)</label>
+                        <select id="expertise" class="form-select" multiple style="height: 120px;">
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="react-js">React.js</option>
+                            <option value="node-js">Node.js</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="aws">AWS Cloud</option>
+                            <option value="docker-kubernetes">Docker & Kubernetes</option>
+                            <option value="machine-learning">Machine Learning</option>
+                            <option value="mobile-ios">iOS Development</option>
+                            <option value="mobile-android">Android Development</option>
+                        </select>
+                        <small style="color: #636e72;">Hold Ctrl/Cmd to select multiple</small>
+                        
+                        <label class="form-label" for="years-experience" style="margin-top: 15px;">Years of Professional Experience</label>
+                        <input type="number" id="years-experience" class="form-input" placeholder="e.g., 5" min="1" max="50">
+                        
+                        <label class="form-label" for="current-role" style="margin-top: 15px;">Current Role/Title</label>
+                        <input type="text" id="current-role" class="form-input" placeholder="e.g., Senior Software Engineer">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms-agree" required>
+                        <label for="terms-agree">I agree to the <a href="#" style="color: #6c5ce7;">Terms of Service</a> and <a href="#" style="color: #6c5ce7;">Privacy Policy</a></label>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter">Receive updates, mentorship tips, and community news</label>
+                    </div>
+                    
+                    <button type="submit" class="form-btn" id="submit-btn">
+                        Create Account
+                    </button>
+                </form>
+                
+                <div class="login-links">
+                    <p>Already have an account? <a href="#" onclick="toggleLoginSignup()">Sign in here</a></p>
+                    <button class="back-btn" onclick="goToPreLoginPage()" style="margin-top: 20px;">
+                        <i class="fas fa-arrow-left"></i> Back to Role Selection
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mentee Dashboard -->
+    <div class="container" id="mentee-dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar" id="mentee-avatar">JD</div>
+                <div class="user-details">
+                    <h3 id="mentee-name">John Doe</h3>
+                    <p id="mentee-role-label">Mentee | Software Development</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <button class="nav-btn active" onclick="switchMenteeTab('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="switchMenteeTab('projects')">My Projects</button>
+                <button class="nav-btn" onclick="switchMenteeTab('mentors')">My Mentors</button>
+                <button class="nav-btn" onclick="switchMenteeTab('community')">Community</button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div id="mentee-dashboard-tab">
+            <h2 class="section-title">Welcome to Your Dashboard</h2>
+            <p class="section-subtitle">Track your progress and continue your learning journey</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">3</div>
+                            <div class="label">Projects Posted</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">12</div>
+                            <div class="label">Feedback Received</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">2</div>
+                            <div class="label">Active Mentors</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">5</div>
+                            <div class="label">Skills Improved</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                    <ul style="padding-left: 20px; color: #636e72; line-height: 1.6;">
+                        <li>Complete your React Todo App project</li>
+                        <li>Schedule a session with Jamie Wilson this week</li>
+                        <li>Check feedback on your E-commerce API</li>
+                        <li>Join "Advanced JavaScript" webinar on Friday</li>
+                    </ul>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-tasks"></i> Next Steps</h3>
+                    <ul style="padding-left: 20px; color: #636e72; line-height: 1.6;">
+                        <li><input type="checkbox"> Implement mentor feedback on Todo App</li>
+                        <li><input type="checkbox"> Start new Data Visualization project</li>
+                        <li><input type="checkbox"> Review React Hooks documentation</li>
+                        <li><input type="checkbox"> Connect with a Data Science mentor</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Full Projects Access -->
+            <section class="projects-showcase">
+                <h2 class="section-title">Community Projects with Full Access</h2>
+                <p class="section-subtitle">Now you can see complete code and all feedback</p>
+                
+                <div class="projects-grid" id="full-projects-container">
+                    <!-- Full project cards will be dynamically added here -->
+                </div>
+            </section>
+        </div>
+        
+        <!-- My Projects Tab -->
+        <div id="mentee-projects-tab" style="display: none;">
+            <h2 class="section-title">My Projects</h2>
+            <p class="section-subtitle">Submit projects and get feedback from mentors</p>
+            
+            <div class="feedback-form">
+                <h3><i class="fas fa-plus-circle"></i> Submit New Project</h3>
+                <input type="text" class="form-input" placeholder="Project Title" style="margin-bottom: 15px;">
+                <textarea class="form-input" placeholder="Project description..." style="min-height: 100px; margin-bottom: 15px;"></textarea>
+                <input type="text" class="form-input" placeholder="Tech stack (e.g., React, Node.js)" style="margin-bottom: 15px;">
+                <textarea class="form-input" placeholder="Code snippet..." style="min-height: 150px; font-family: monospace; margin-bottom: 15px;"></textarea>
+                <button class="form-btn" style="width: auto;">Submit for Review</button>
+            </div>
+            
+            <div class="dashboard-grid" style="margin-top: 40px;">
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-code"></i> Todo App with React</h3>
+                    <p style="color: #636e72; margin-bottom: 15px;">A simple todo application with React hooks</p>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">3</div>
+                            <div class="label">Feedback</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">4.5</div>
+                            <div class="label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="review-btn" style="margin-top: 15px;">View Feedback</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-database"></i> E-commerce API</h3>
+                    <p style="color: #636e72; margin-bottom: 15px;">RESTful API for online store</p>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">2</div>
+                            <div class="label">Feedback</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">4.0</div>
+                            <div class="label">Rating</div>
+                        </div>
+                    </div>
+                    <button class="review-btn" style="margin-top: 15px;">View Feedback</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- My Mentors Tab -->
+        <div id="mentee-mentors-tab" style="display: none;">
+            <h2 class="section-title">My Mentors</h2>
+            <p class="section-subtitle">Connect and learn from experienced professionals</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div class="user-avatar" style="background: #0984e3;">JW</div>
+                        <div>
+                            <h3>Jamie Wilson</h3>
+                            <p style="color: #636e72;">Senior Full-Stack Developer</p>
+                        </div>
+                    </div>
+                    <p style="color: #636e72; margin-bottom: 15px;">Helping with React projects and career guidance. 3 sessions completed.</p>
+                    <div class="action-buttons">
+                        <button class="review-btn">Message</button>
+                        <button class="review-btn" style="background: #00b894;">Schedule Call</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div class="user-avatar" style="background: #00b894;">SC</div>
+                        <div>
+                            <h3>Sarah Chen</h3>
+                            <p style="color: #636e72;">Cybersecurity Expert</p>
+                        </div>
+                    </div>
+                    <p style="color: #636e72; margin-bottom: 15px;">Providing security feedback on your projects. 1 session completed.</p>
+                    <div class="action-buttons">
+                        <button class="review-btn">Message</button>
+                        <button class="review-btn" style="background: #00b894;">Schedule Call</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Community Tab -->
+        <div id="mentee-community-tab" style="display: none;">
+            <h2 class="section-title">Community Projects</h2>
+            <p class="section-subtitle">Explore and comment on projects from other mentees</p>
+            
+            <div class="projects-grid" id="community-projects-container">
+                <!-- Community projects will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mentor Dashboard -->
+    <div class="container" id="mentor-dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar" id="mentor-avatar">JW</div>
+                <div class="user-details">
+                    <h3 id="mentor-name">Jamie Wilson</h3>
+                    <p id="mentor-role-label">Mentor | Full-Stack Development</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <button class="nav-btn active" onclick="switchMentorTab('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="switchMentorTab('projects')">Review Projects</button>
+                <button class="nav-btn" onclick="switchMentorTab('mentees')">My Mentees</button>
+                <button class="nav-btn" onclick="switchMentorTab('feedback')">My Feedback</button>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div id="mentor-dashboard-tab">
+            <h2 class="section-title">Mentor Dashboard</h2>
+            <p class="section-subtitle">Track your mentoring activity and help others grow</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-chart-line"></i> Your Impact</h3>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">24</div>
+                            <div class="label">Projects Reviewed</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">8</div>
+                            <div class="label">Active Mentees</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">4.8</div>
+                            <div class="label">Avg Rating</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">15</div>
+                            <div class="label">Sessions Held</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-tasks"></i> Pending Reviews</h3>
+                    <div style="color: #636e72; margin-bottom: 15px;">
+                        <p><strong>3 projects</strong> awaiting your feedback</p>
+                        <p><strong>2 mentees</strong> requested sessions</p>
+                    </div>
+                    <button class="review-btn">Review Projects</button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-star"></i> Top Feedback</h3>
+                    <div class="feedback-item" style="margin-bottom: 0;">
+                        <div class="feedback-author">
+                            <div class="feedback-avatar">AR</div>
+                            <div class="feedback-mentor">Alex Rivera's Todo App</div>
+                        </div>
+                        <div class="feedback-text">"Great use of React hooks! Consider adding error boundaries."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Review Projects Tab -->
+        <div id="mentor-projects-tab" style="display: none;">
+            <h2 class="section-title">Projects Awaiting Review</h2>
+            <p class="section-subtitle">Provide feedback to help mentees improve</p>
+            
+            <div class="pending-projects">
+                <div class="project-request">
+                    <div class="project-info">
+                        <h4>React Todo App with Hooks</h4>
+                        <p>By Alex Rivera | Submitted 2 days ago</p>
+                        <p style="color: #636e72; font-size: 0.9rem; margin-top: 5px;">A todo application using React functional components and hooks</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="review-btn" onclick="openFeedbackModal('todo-app')">Review</button>
+                        <button class="review-btn" style="background: #636e72;">View Code</button>
+                    </div>
+                </div>
+                
+                <div class="project-request">
+                    <div class="project-info">
+                        <h4>E-commerce REST API</h4>
+                        <p>By Maya Patel | Submitted 1 day ago</p>
+                        <p style="color: #636e72; font-size: 0.9rem; margin-top: 5px;">Node.js API with Express and MongoDB</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="review-btn" onclick="openFeedbackModal('api-project')">Review</button>
+                        <button class="review-btn" style="background: #636e72;">View Code</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feedback Form -->
+            <div class="feedback-form" style="margin-top: 40px;">
+                <h3>Provide Detailed Feedback</h3>
+                <textarea class="feedback-textarea" placeholder="Provide constructive feedback on code structure, best practices, improvements..."></textarea>
+                
+                <div class="rating-section">
+                    <label class="form-label" style="margin: 0;">Rating:</label>
+                    <div class="star-rating">
+                        <i class="far fa-star star" onclick="rateProject(1)"></i>
+                        <i class="far fa-star star" onclick="rateProject(2)"></i>
+                        <i class="far fa-star star" onclick="rateProject(3)"></i>
+                        <i class="far fa-star star" onclick="rateProject(4)"></i>
+                        <i class="far fa-star star" onclick="rateProject(5)"></i>
+                    </div>
+                </div>
+                
+                <button class="form-btn" onclick="submitFeedback()">Submit Feedback</button>
+            </div>
+        </div>
+        
+        <!-- My Mentees Tab -->
+        <div id="mentor-mentees-tab" style="display: none;">
+            <h2 class="section-title">My Mentees</h2>
+            <p class="section-subtitle">Track progress and provide ongoing guidance</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div class="user-avatar" style="background: #6c5ce7;">AR</div>
+                        <div>
+                            <h3>Alex Rivera</h3>
+                            <p style="color: #636e72;">2 projects | 5 sessions</p>
+                        </div>
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">85%</div>
+                            <div class="label">Progress</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">4.7</div>
+                            <div class="label">Avg. Rating</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons" style="margin-top: 15px;">
+                        <button class="review-btn">Message</button>
+                        <button class="review-btn" style="background: #00b894;">View Progress</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div class="user-avatar" style="background: #fd79a8;">MP</div>
+                        <div>
+                            <h3>Maya Patel</h3>
+                            <p style="color: #636e72;">3 projects | 8 sessions</p>
+                        </div>
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <div class="number">92%</div>
+                            <div class="label">Progress</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">4.9</div>
+                            <div class="label">Avg. Rating</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons" style="margin-top: 15px;">
+                        <button class="review-btn">Message</button>
+                        <button class="review-btn" style="background: #00b894;">View Progress</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feedback History Tab -->
+        <div id="mentor-feedback-tab" style="display: none;">
+            <h2 class="section-title">My Feedback History</h2>
+            <p class="section-subtitle">Track all the feedback you've provided</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h4>React Todo App - Alex Rivera</h4>
+                    <p style="color: #636e72; margin: 10px 0;">"Great use of React hooks! Consider adding error boundaries."</p>
+                    <div class="rating-section">
+                        <span>Rating: </span>
+                        <div class="star-rating">
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="far fa-star star"></i>
+                        </div>
+                    </div>
+                    <p style="color: #636e72; font-size: 0.9rem;">Submitted: 2 days ago</p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h4>Node.js API - Maya Patel</h4>
+                    <p style="color: #636e72; margin: 10px 0;">"Excellent error handling. Add rate limiting for production."</p>
+                    <div class="rating-section">
+                        <span>Rating: </span>
+                        <div class="star-rating">
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                            <i class="fas fa-star star" style="color: #ffd32a;"></i>
+                        </div>
+                    </div>
+                    <p style="color: #636e72; font-size: 0.9rem;">Submitted: 1 week ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mentor Listing Page (Hidden by default) -->
+    <div class="container" id="mentors-page" style="display: none;">
+        <div class="page-header">
+            <button class="back-btn" onclick="goToHome()" style="background: #6c5ce7; color: white; border: none; padding: 12px 25px; border-radius: 50px;">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+            <h2 class="selected-specialty" id="specialty-title">Cybersecurity Mentors</h2>
+        </div>
+        
+        <p style="color: #636e72; text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
+            Here are a few cybersecurity mentors. Login to see all mentors and connect with them.
+        </p>
+        
+        <div class="mentors-list" id="mentors-container">
+            <!-- Mentor cards will be dynamically added here -->
+        </div>
+        
+        <div class="login-prompt">
+            <h3>Want to see all mentors and connect?</h3>
+            <p>Login to view complete mentor profiles, schedule sessions, and send messages to mentors.</p>
+            <button class="cta-button" onclick="showPreLoginPage()" style="margin-top: 0;">
+                <i class="fas fa-sign-in-alt"></i> Login / Sign Up
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // App State
+        let selectedRole = '';
+        let isLoginMode = false;
+        let currentUser = null;
+        let currentRating = 0;
+        
+        // Store mentor data for different specialties
+        const mentorsData = {
+            'cybersecurity': [
+                {
+                    name: "Alex Morgan",
+                    title: "Senior Security Architect",
+                    experience: "10+ years in cybersecurity",
+                    expertise: ["Ethical Hacking", "Network Security", "Threat Analysis", "Incident Response"],
+                    bio: "I specialize in building secure systems and teaching others how to identify vulnerabilities. I've worked with Fortune 500 companies to secure their infrastructure.",
+                    color: "#6c5ce7"
+                },
+                {
+                    name: "Sarah Chen",
+                    title: "Cybersecurity Consultant",
+                    experience: "8 years in security consulting",
+                    expertise: ["Penetration Testing", "Security Audits", "Compliance", "Cloud Security"],
+                    bio: "I help companies strengthen their security posture through comprehensive audits and hands-on training. I love mentoring newcomers to cybersecurity.",
+                    color: "#00b894"
+                },
+                {
+                    name: "Marcus Johnson",
+                    title: "CISO at TechSecure",
+                    experience: "15+ years leadership experience",
+                    expertise: ["Security Strategy", "Risk Management", "Team Leadership", "Governance"],
+                    bio: "I mentor aspiring cybersecurity leaders on strategy, risk management, and building effective security programs within organizations.",
+                    color: "#fd79a8"
+                }
+            ],
+            'software-dev': [
+                {
+                    name: "Jamie Wilson",
+                    title: "Lead Full-Stack Developer",
+                    experience: "12 years in software development",
+                    expertise: ["React/Node.js", "Microservices", "AWS", "Agile Methodology"],
+                    bio: "I've built scalable applications for startups and enterprises. I enjoy helping developers transition from junior to senior roles.",
+                    color: "#0984e3"
+                },
+                {
+                    name: "Priya Sharma",
+                    title: "Mobile App Developer",
+                    experience: "7 years in mobile development",
+                    expertise: ["iOS Development", "React Native", "UI/UX", "App Store Optimization"],
+                    bio: "I specialize in creating beautiful, functional mobile apps. I mentor developers on mobile best practices and career growth.",
+                    color: "#e17055"
+                },
+                {
+                    name: "David Kim",
+                    title: "Software Architect",
+                    experience: "14 years in software architecture",
+                    expertise: ["System Design", "Scalability", "DevOps", "Code Reviews"],
+                    bio: "I focus on helping developers understand software architecture principles and design scalable systems.",
+                    color: "#00cec9"
+                }
+            ],
+            'data-science': [
+                {
+                    name: "Elena Rodriguez",
+                    title: "Data Science Lead",
+                    experience: "9 years in data science",
+                    expertise: ["Machine Learning", "Python/R", "Data Visualization", "A/B Testing"],
+                    bio: "I build predictive models and help businesses make data-driven decisions. I mentor aspiring data scientists on real-world projects.",
+                    color: "#a29bfe"
+                },
+                {
+                    name: "Thomas Wright",
+                    title: "ML Engineer",
+                    experience: "6 years in machine learning",
+                    expertise: ["Deep Learning", "NLP", "Computer Vision", "MLOps"],
+                    bio: "I specialize in deploying machine learning models to production. I mentor on the practical aspects of ML engineering.",
+                    color: "#fab1a0"
+                },
+                {
+                    name: "Lisa Park",
+                    title: "Data Analytics Director",
+                    experience: "11 years in analytics",
+                    expertise: ["Business Intelligence", "SQL", "Tableau", "Statistical Analysis"],
+                    bio: "I help organizations derive insights from their data. I mentor analysts on storytelling with data and career advancement.",
+                    color: "#74b9ff"
+                }
+            ]
+        };
+        
+        // Project data for showcase
+        const projectsData = [
+            {
+                id: 1,
+                title: "E-Commerce API with Node.js",
+                author: "Alex Rivera",
+                tech: ["Node.js", "Express", "MongoDB", "JWT"],
+                description: "A RESTful API for an e-commerce platform with user authentication, product management, and order processing.",
+                codePreview: [
+                    {line: "// User authentication middleware", type: "comment"},
+                    {line: "const authenticateUser = async (req, res, next) => {", type: "normal"},
+                    {line: "  try {", type: "normal"},
+                    {line: "    const token = req.header('Authorization').replace('Bearer ', '');", type: "normal"},
+                    {line: "    const decoded = jwt.verify(token, process.env.JWT_SECRET);", type: "normal"},
+                    {line: "    const user = await User.findById(decoded.userId);", type: "normal"},
+                    {line: "", type: "normal"},
+                    {line: "    if (!user) {", type: "normal"},
+                    {line: "      throw new Error();", type: "normal"},
+                    {line: "    }", type: "normal"},
+                    {line: "", type: "normal"},
+                    {line: "    req.user = user;", type: "normal"},
+                    {line: "    req.token = token;", type: "normal"},
+                    {line: "    next();", type: "normal"},
+                    {line: "  } catch (error) {", type: "normal"},
+                    {line: "    res.status(401).send({ error: 'Please authenticate.' });", type: "normal"},
+                    {line: "  }", type: "normal"},
+                    {line: "};", type: "normal"},
+                    {line: "", type: "normal"},
+                    {line: "// Product controller", type: "comment"},
+                    {line: "const getProducts = async (req, res) => {", type: "normal"},
+                    {line: "  try {", type: "normal"},
+                    {line: "    const products = await Product.find({});", type: "normal"},
+                    {line: "    res.json(products);", type: "normal"},
+                    {line: "  } catch (error) {", type: "normal"},
+                    {line: "    res.status(500).json({ error: 'Server error' });", type: "normal"},
+                    {line: "  }", type: "normal"},
+                    {line: "};", type: "normal"}
+                ],
+                feedback: [
+                    {
+                        mentor: "Sarah Chen",
+                        mentorInitials: "SC",
+                        text: "Great structure! Consider adding rate limiting to prevent abuse of your authentication endpoints."
+                    },
+                    {
+                        mentor: "David Kim",
+                        mentorInitials: "DK",
+                        text: "Good error handling. You might want to add more specific error messages for different failure cases."
+                    },
+                    {
+                        mentor: "Jamie Wilson",
+                        mentorInitials: "JW",
+                        text: "Consider adding pagination to your getProducts endpoint for better performance with large datasets."
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "React Task Management App",
+                author: "Maya Patel",
+                tech: ["React", "Redux", "Material-UI", "Firebase"],
+                description: "A responsive task management application with drag-and-drop functionality and real-time updates.",
+                codePreview: [
+                    {line: "// Task component with drag and drop", type: "comment"},
+                    {line: "const Task = ({ task, index, columnId }) => {", type: "normal"},
+                    {line: "  const [{ isDragging }, drag] = useDrag({", type: "normal"},
+                    {line: "    type: 'task',", type: "normal"},
+                    {line: "    item: { index, columnId, id: task.id },", type: "normal"},
+                    {line: "    collect: (monitor) => ({", type: "normal"},
+                    {line: "      isDragging: monitor.isDragging(),", type: "normal"},
+                    {line: "    }),", type: "normal"},
+                    {line: "  });", type: "normal"},
+                    {line: "", type: "normal"},
+                    {line: "  return (", type: "normal"},
+                    {line: "    <div", type: "normal"},
+                    {line: "      ref={drag}", type: "normal"},
+                    {line: "      className={`task ${isDragging ? 'dragging' : ''}`}", type: "normal"},
+                    {line: "      style={{ opacity: isDragging ? 0.5 : 1 }}", type: "normal"},
+                    {line: "    >", type: "normal"},
+                    {line: "      <div className=\"task-header\">", type: "normal"},
+                    {line: "        <span className=\"task-priority\">{task.priority}</span>", type: "normal"},
+                    {line: "        <h4>{task.title}</h4>", type: "normal"},
+                    {line: "      </div>", type: "normal"},
+                    {line: "      <p className=\"task-description\">{task.description}</p>", type: "normal"},
+                    {line: "      <div className=\"task-footer\">", type: "normal"},
+                    {line: "        <span className=\"task-due-date\">{formatDate(task.dueDate)}</span>", type: "normal"},
+                    {line: "        <div className=\"task-actions\">", type: "normal"},
+                    {line: "          <button onClick={() => handleEdit(task.id)}>Edit</button>", type: "normal"},
+                    {line: "          <button onClick={() => handleDelete(task.id)}>Delete</button>", type: "normal"},
+                    {line: "        </div>", type: "normal"},
+                    {line: "      </div>", type: "normal"},
+                    {line: "    </div>", type: "normal"},
+                    {line: "  );", type: "normal"},
+                    {line: "};", type: "normal"}
+                ],
+                feedback: [
+                    {
+                        mentor: "Jamie Wilson",
+                        mentorInitials: "JW",
+                        text: "Excellent use of React DnD! Consider memoizing your task component to prevent unnecessary re-renders."
+                    },
+                    {
+                        mentor: "Priya Sharma",
+                        mentorInitials: "PS",
+                        text: "Clean component structure. You could add PropTypes for better type checking and documentation."
+                    },
+                    {
+                        mentor: "David Kim",
+                        mentorInitials: "DK",
+                        text: "Good separation of concerns. Consider extracting the task actions into a separate component for better reusability."
+                    }
+                ]
+            }
+        ];
+        
+        // Specialty titles mapping
+        const specialtyTitles = {
+            'cybersecurity': 'Cybersecurity',
+            'software-dev': 'Software Development',
+            'data-science': 'Data Science'
+        };
+        
+        // Initialize page
+        window.onload = function() {
+            document.getElementById('home-page').style.display = 'block';
+            displayProjects();
+        };
+        
+        // Navigation Functions
+        function goToHome() {
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('pre-login-page').style.display = 'none';
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('mentee-dashboard').style.display = 'none';
+            document.getElementById('mentor-dashboard').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'none';
+        }
+        
+        function showPreLoginPage() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('pre-login-page').style.display = 'block';
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('mentee-dashboard').style.display = 'none';
+            document.getElementById('mentor-dashboard').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'none';
+            
+            // Reset selection
+            selectRole('');
+        }
+        
+        function goToPreLoginPage() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('pre-login-page').style.display = 'block';
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('mentee-dashboard').style.display = 'none';
+            document.getElementById('mentor-dashboard').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'none';
+        }
+        
+        function goToLoginPage() {
+            if (!selectedRole) return;
+            
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('pre-login-page').style.display = 'none';
+            document.getElementById('login-page').style.display = 'block';
+            document.getElementById('mentee-dashboard').style.display = 'none';
+            document.getElementById('mentor-dashboard').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'none';
+            
+            // Update login page based on role
+            updateLoginPageForRole();
+        }
+        
+        // Role Selection
+        function selectRole(role) {
+            selectedRole = role;
+            
+            // Update UI
+            document.getElementById('mentee-role-card').classList.remove('selected');
+            document.getElementById('mentor-role-card').classList.remove('selected');
+            
+            if (role === 'mentee') {
+                document.getElementById('mentee-role-card').classList.add('selected');
+            } else if (role === 'mentor') {
+                document.getElementById('mentor-role-card').classList.add('selected');
+            }
+            
+            // Enable/disable continue button
+            document.getElementById('continue-btn').disabled = !role;
+        }
+        
+        // Update login page based on selected role
+        function updateLoginPageForRole() {
+            const title = document.getElementById('login-page-title');
+            const subtitle = document.getElementById('login-page-subtitle');
+            const menteeFields = document.getElementById('mentee-fields');
+            const mentorFields = document.getElementById('mentor-fields');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            if (selectedRole === 'mentee') {
+                title.textContent = 'Join as Mentee';
+                subtitle.textContent = 'Create your account to start your learning journey';
+                menteeFields.style.display = 'block';
+                mentorFields.style.display = 'none';
+                submitBtn.textContent = 'Create Account & Start Learning';
+            } else {
+                title.textContent = 'Join as Mentor';
+                subtitle.textContent = 'Share your expertise and guide the next generation of tech professionals';
+                menteeFields.style.display = 'none';
+                mentorFields.style.display = 'block';
+                submitBtn.textContent = 'Create Account & Start Mentoring';
+            }
+        }
+        
+        // Toggle between login and signup
+        function toggleLoginSignup() {
+            const title = document.getElementById('login-page-title');
+            const subtitle = document.getElementById('login-page-subtitle');
+            const submitBtn = document.getElementById('submit-btn');
+            const toggleLink = document.querySelector('.login-links a');
+            
+            isLoginMode = !isLoginMode;
+            
+            if (isLoginMode) {
+                title.textContent = selectedRole === 'mentee' ? 'Welcome Back, Mentee!' : 'Welcome Back, Mentor!';
+                subtitle.textContent = 'Sign in to your account to continue';
+                submitBtn.textContent = 'Sign In';
+                toggleLink.textContent = "Don't have an account? Sign up here";
+                
+                // Hide some fields for login
+                document.getElementById('full-name').style.display = 'none';
+                document.querySelector('label[for="full-name"]').style.display = 'none';
+                
+                if (selectedRole === 'mentee') {
+                    document.getElementById('interests').style.display = 'none';
+                    document.querySelector('label[for="interests"]').style.display = 'none';
+                    document.getElementById('experience-level').style.display = 'none';
+                    document.querySelector('label[for="experience-level"]').style.display = 'none';
+                } else {
+                    document.getElementById('expertise').style.display = 'none';
+                    document.querySelector('label[for="expertise"]').style.display = 'none';
+                    document.getElementById('years-experience').style.display = 'none';
+                    document.querySelector('label[for="years-experience"]').style.display = 'none';
+                    document.getElementById('current-role').style.display = 'none';
+                    document.querySelector('label[for="current-role"]').style.display = 'none';
+                }
+            } else {
+                updateLoginPageForRole();
+                toggleLink.textContent = 'Already have an account? Sign in here';
+                
+                // Show all fields for signup
+                document.getElementById('full-name').style.display = 'block';
+                document.querySelector('label[for="full-name"]').style.display = 'block';
+                
+                if (selectedRole === 'mentee') {
+                    document.getElementById('interests').style.display = 'block';
+                    document.querySelector('label[for="interests"]').style.display = 'block';
+                    document.getElementById('experience-level').style.display = 'block';
+                    document.querySelector('label[for="experience-level"]').style.display = 'block';
+                } else {
+                    document.getElementById('expertise').style.display = 'block';
+                    document.querySelector('label[for="expertise"]').style.display = 'block';
+                    document.getElementById('years-experience').style.display = 'block';
+                    document.querySelector('label[for="years-experience"]').style.display = 'block';
+                    document.getElementById('current-role').style.display = 'block';
+                    document.querySelector('label[for="current-role"]').style.display = 'block';
+                }
+            }
+        }
+        
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            
+            if (isLoginMode) {
+                // Login logic
+                alert(`Welcome back! You've successfully signed in as a ${selectedRole}.`);
+                
+                // Redirect to appropriate dashboard
+                showDashboard(fullName, email);
+            } else {
+                // Signup logic
+                alert(`Account created successfully!\n\nWelcome ${fullName}!\n\nYou will now be redirected to your dashboard.`);
+                
+                // Redirect to appropriate dashboard
+                showDashboard(fullName, email);
+            }
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Show appropriate dashboard after login/signup
+        function showDashboard(fullName, email) {
+            currentUser = {
+                name: fullName,
+                email: email,
+                role: selectedRole
+            };
+            
+            if (selectedRole === 'mentee') {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('mentee-dashboard').style.display = 'block';
+                
+                // Update mentee info
+                document.getElementById('mentee-name').textContent = fullName;
+                document.getElementById('mentee-avatar').textContent = fullName.substring(0, 2).toUpperCase();
+                
+                // Display full projects for mentee
+                displayFullProjects();
+            } else {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('mentor-dashboard').style.display = 'block';
+                
+                // Update mentor info
+                document.getElementById('mentor-name').textContent = fullName;
+                document.getElementById('mentor-avatar').textContent = fullName.substring(0, 2).toUpperCase();
+            }
+        }
+        
+        // Function to display projects on home page (non-logged in view)
+        function displayProjects() {
+            const projectsContainer = document.getElementById('projects-container');
+            projectsContainer.innerHTML = '';
+            
+            projectsData.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                
+                // Create tech tags HTML
+                const techTags = project.tech.map(tech => 
+                    `<span class="tech-tag">${tech}</span>`
+                ).join('');
+                
+                // Create code preview HTML (limited to 8-10 lines for non-logged users)
+                const limitedCodeLines = project.codePreview.slice(0, 8);
+                const codeLines = limitedCodeLines.map(line => {
+                    if (line.type === 'comment') {
+                        return `<div class="code-line code-comment">${line.line}</div>`;
+                    } else if (line.type === 'keyword') {
+                        return `<div class="code-line code-keyword">${line.line}</div>`;
+                    } else if (line.type === 'string') {
+                        return `<div class="code-line code-string">${line.line}</div>`;
+                    } else {
+                        return `<div class="code-line">${line.line}</div>`;
+                    }
+                }).join('');
+                
+                // Create feedback HTML (limited to 1 feedback for non-logged users)
+                const limitedFeedback = project.feedback.slice(0, 1);
+                const feedbackItems = limitedFeedback.map(fb => `
+                    <div class="feedback-item">
+                        <div class="feedback-author">
+                            <div class="feedback-avatar" style="background: #${Math.floor(Math.random()*16777215).toString(16)}">
+                                ${fb.mentorInitials}
+                            </div>
+                            <div class="feedback-mentor">${fb.mentor}</div>
+                        </div>
+                        <div class="feedback-text">${fb.text}</div>
+                    </div>
+                `).join('');
+                
+                projectCard.innerHTML = `
+                    <div class="project-header">
+                        <h3 class="project-title">${project.title}</h3>
+                        <div class="project-author">By ${project.author}</div>
+                        <div class="project-tech">
+                            ${techTags}
+                        </div>
+                    </div>
+                    
+                    <div class="project-description">
+                        <p>${project.description}</p>
+                    </div>
+                    
+                    <div class="code-preview">
+                        <h4><i class="fas fa-code"></i> Code Preview (Partial)</h4>
+                        <div class="code-block">
+                            ${codeLines}
+                            ${project.codePreview.length > 8 ? 
+                                `<div class="code-line code-comment">// ... ${project.codePreview.length - 8} more lines (login to view full code)</div>` : 
+                                ''}
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-section">
+                        <h4><i class="fas fa-comment"></i> Mentor Feedback (1 of ${project.feedback.length})</h4>
+                        ${feedbackItems}
+                        ${project.feedback.length > 1 ? 
+                            `<p style="color: #6c5ce7; font-size: 0.9rem; margin-top: 10px; text-align: center;">
+                                <i class="fas fa-lock"></i> Login to view ${project.feedback.length - 1} more feedback comments
+                            </p>` : 
+                            ''}
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectCard);
+            });
+        }
+        
+        // Function to display full projects on mentee dashboard (logged in view)
+        function displayFullProjects() {
+            const projectsContainer = document.getElementById('full-projects-container');
+            projectsContainer.innerHTML = '';
+            
+            projectsData.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                
+                // Create tech tags HTML
+                const techTags = project.tech.map(tech => 
+                    `<span class="tech-tag">${tech}</span>`
+                ).join('');
+                
+                // Create full code preview HTML
+                const codeLines = project.codePreview.map(line => {
+                    if (line.type === 'comment') {
+                        return `<div class="code-line code-comment">${line.line}</div>`;
+                    } else if (line.type === 'keyword') {
+                        return `<div class="code-line code-keyword">${line.line}</div>`;
+                    } else if (line.type === 'string') {
+                        return `<div class="code-line code-string">${line.line}</div>`;
+                    } else {
+                        return `<div class="code-line">${line.line}</div>`;
+                    }
+                }).join('');
+                
+                // Create all feedback HTML
+                const feedbackItems = project.feedback.map(fb => `
+                    <div class="feedback-item">
+                        <div class="feedback-author">
+                            <div class="feedback-avatar" style="background: #${Math.floor(Math.random()*16777215).toString(16)}">
+                                ${fb.mentorInitials}
+                            </div>
+                            <div class="feedback-mentor">${fb.mentor}</div>
+                        </div>
+                        <div class="feedback-text">${fb.text}</div>
+                    </div>
+                `).join('');
+                
+                projectCard.innerHTML = `
+                    <div class="project-header">
+                        <h3 class="project-title">${project.title}</h3>
+                        <div class="project-author">By ${project.author}</div>
+                        <div class="project-tech">
+                            ${techTags}
+                        </div>
+                    </div>
+                    
+                    <div class="project-description">
+                        <p>${project.description}</p>
+                    </div>
+                    
+                    <div class="code-preview">
+                        <h4><i class="fas fa-code"></i> Full Code</h4>
+                        <div class="full-code-block">
+                            ${codeLines}
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-section">
+                        <h4><i class="fas fa-comment"></i> All Mentor Feedback (${project.feedback.length} comments)</h4>
+                        ${feedbackItems}
+                        <div class="comment-section">
+                            <textarea class="comment-input" placeholder="Add your comment on this project..."></textarea>
+                            <button class="submit-comment-btn">Post Comment</button>
+                        </div>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectCard);
+            });
+        }
+        
+        // Mentee Dashboard Navigation
+        function switchMenteeTab(tab) {
+            // Update active button
+            document.querySelectorAll('#mentee-dashboard .nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show selected tab
+            document.getElementById('mentee-dashboard-tab').style.display = 'none';
+            document.getElementById('mentee-projects-tab').style.display = 'none';
+            document.getElementById('mentee-mentors-tab').style.display = 'none';
+            document.getElementById('mentee-community-tab').style.display = 'none';
+            
+            document.getElementById(`mentee-${tab}-tab`).style.display = 'block';
+        }
+        
+        // Mentor Dashboard Navigation
+        function switchMentorTab(tab) {
+            // Update active button
+            document.querySelectorAll('#mentor-dashboard .nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show selected tab
+            document.getElementById('mentor-dashboard-tab').style.display = 'none';
+            document.getElementById('mentor-projects-tab').style.display = 'none';
+            document.getElementById('mentor-mentees-tab').style.display = 'none';
+            document.getElementById('mentor-feedback-tab').style.display = 'none';
+            
+            document.getElementById(`mentor-${tab}-tab`).style.display = 'block';
+        }
+        
+        // Function to show mentors for a selected specialty
+        function showMentors(specialty) {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('pre-login-page').style.display = 'none';
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('mentee-dashboard').style.display = 'none';
+            document.getElementById('mentor-dashboard').style.display = 'none';
+            document.getElementById('mentors-page').style.display = 'block';
+            
+            // Set the specialty title
+            document.getElementById('specialty-title').textContent = `${specialtyTitles[specialty]} Mentors`;
+            
+            // Get the mentors container
+            const mentorsContainer = document.getElementById('mentors-container');
+            mentorsContainer.innerHTML = '';
+            
+            // Get mentors for this specialty
+            const mentors = mentorsData[specialty] || [];
+            
+            // Create mentor cards
+            mentors.forEach((mentor, index) => {
+                const mentorCard = document.createElement('div');
+                mentorCard.className = 'mentor-card';
+                
+                // Create expertise tags HTML
+                const expertiseTags = mentor.expertise.map(skill => 
+                    `<span class="tag">${skill}</span>`
+                ).join('');
+                
+                mentorCard.innerHTML = `
+                    <div class="mentor-header">
+                        <div class="mentor-avatar" style="background: ${mentor.color}">
+                            ${mentor.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div class="mentor-info">
+                            <h3>${mentor.name}</h3>
+                            <div class="mentor-title">${mentor.title}</div>
+                            <div class="mentor-experience">${mentor.experience}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-expertise">
+                        <h4>Areas of Expertise</h4>
+                        <div class="expertise-tags">
+                            ${expertiseTags}
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-bio">
+                        <p>${mentor.bio}</p>
+                    </div>
+                    
+                    <button class="view-profile-btn" onclick="showPreLoginPage()">
+                        <i class="fas fa-user-circle"></i> Login to Connect
+                    </button>
+                `;
+                
+                mentorsContainer.appendChild(mentorCard);
+            });
+        }
+        
+        // Feedback functions
+        function rateProject(rating) {
+            currentRating = rating;
+            updateStars();
+        }
+        
+        function updateStars() {
+            const stars = document.querySelectorAll('.star-rating .star');
+            stars.forEach((star, index) => {
+                if (index < currentRating) {
+                    star.className = 'fas fa-star star';
+                    star.style.color = '#ffd32a';
+                } else {
+                    star.className = 'far fa-star star';
+                    star.style.color = '#ffd32a';
+                }
+            });
+        }
+        
+        function submitFeedback() {
+            const feedbackText = document.querySelector('.feedback-textarea').value;
+            
+            if (!feedbackText.trim()) {
+                alert('Please provide feedback text');
+                return;
+            }
+            
+            if (currentRating === 0) {
+                alert('Please provide a rating');
+                return;
+            }
+            
+            alert(`Feedback submitted successfully!\nRating: ${currentRating}/5\n\nYour feedback will help the mentee improve their skills.`);
+            
+            // Reset form
+            document.querySelector('.feedback-textarea').value = '';
+            currentRating = 0;
+            updateStars();
+        }
+        
+        function openFeedbackModal(projectId) {
+            alert(`Opening feedback form for project: ${projectId}\n\nIn a real app, this would open a modal with the project details.`);
+        }
+        
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const query = document.querySelector('.search-box input').value;
+            if (query.trim()) {
+                alert(`Searching for: "${query}"\n\nPlease login to see search results and connect with mentors.`);
+                showPreLoginPage();
+            }
+        });
+        
+        document.querySelector('.search-box input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+        
+        // Logout
+        function logout() {
+            currentUser = null;
+            selectedRole = '';
+            goToHome();
+        }
+    </script>
+</body>
+</html>
