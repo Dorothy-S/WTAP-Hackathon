@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Course Path - Mentee Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #3498db;
+        }
+        
+        /* Role Header Section */
+        .role-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .role-title-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .role-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+        
+        .role-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .role-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-bottom: 25px;
+        }
+        
+        .role-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .role-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 250px;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Courses Section */
+        .courses-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .courses-filter {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .courses-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .course-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-card-header {
+            display: flex;
+            padding: 25px;
+            gap: 25px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .course-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .course-info {
+            flex: 1;
+        }
+        
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .course-provider {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .course-description {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .course-stats {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .course-stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+        
+        .course-stat-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .recommendation-badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Mentor Connections Section */
+        .mentor-connections {
+            padding: 20px 25px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .mentor-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mentor-section-title i {
+            color: #3498db;
+        }
+        
+        .mentor-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .mentor-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .mentor-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .mentor-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mentor-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .mentor-status {
+            font-size: 0.8rem;
+            color: #27ae60;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .no-mentors {
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 10px 0;
+        }
+        
+        /* Course Action Footer */
+        .course-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background-color: white;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .course-duration {
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-enroll {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-enroll:hover {
+            background-color: #3498db;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .role-title-container {
+                flex-direction: column;
+            }
+            
+            .role-actions {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .course-card-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .course-icon {
+                align-self: flex-start;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .courses-filter {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .role-title {
+                font-size: 2.2rem;
+            }
+            
+            .course-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+        
+        .progress-indicator {
+            width: 100%;
+            height: 6px;
+            background-color: #ecf0f1;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #3498db;
+            border-radius: 3px;
+        }
+        
+        .course-level {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #f1f8ff;
+            color: #3498db;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Mentee<span>Connect</span></a>
+            <div class="nav-links">
+                <a href="#" class="active">Course Paths</a>
+                <a href="#">Find Mentors</a>
+                <a href="#">Community</a>
+                <a href="#">My Learning</a>
+                <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Role Header Section -->
+    <section class="role-header">
+        <div class="container">
+            <div class="role-title-container">
+                <div class="role-info">
+                    <div class="role-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h1 class="role-title">Backend Developer</h1>
+                    <p class="role-description">
+                        Master server-side development, databases, APIs, and system architecture to build robust, scalable applications. This path covers everything from fundamentals to advanced backend concepts used by top tech companies.
+                    </p>
+                    <div class="role-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">42</span>
+                            <span class="stat-label">Courses</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Mentors in Field</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">94%</span>
+                            <span class="stat-label">Career Success Rate</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">6-9 mo</span>
+                            <span class="stat-label">Avg. Completion</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="role-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-play-circle"></i> Start Learning Path
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-user-friends"></i> Find Backend Mentors
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Download Curriculum
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Backend Development Courses</h2>
+                <div class="courses-filter">
+                    <button class="filter-btn active" data-filter="all">All Courses</button>
+                    <button class="filter-btn" data-filter="fundamentals">Fundamentals</button>
+                    <button class="filter-btn" data-filter="databases">Databases</button>
+                    <button class="filter-btn" data-filter="apis">APIs</button>
+                    <button class="filter-btn" data-filter="devops">DevOps</button>
+                </div>
+            </div>
+            
+            <div class="courses-grid">
+                <!-- Course 1 -->
+                <div class="course-card" data-category="fundamentals">
+                    <div class="course-card-header">
+                        <div class="course-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="course-info">
+                            <span class="course-level">Beginner</span>
+                            <h3 class="course-title">Python Backend Fundamentals</h3>
+                            <div class="course-provider">By Tech Academy • 45 hours</div>
+                            <p class="course-description">
+                                Master Python for backend development, covering core concepts, data structures, and best practices for building scalable applications.
+                            </p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <span class="course-stat-value">128</span>
+                                    <span class="course-stat-label">Mentors Taken</span>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">92%</span>
+                                    <span class="course-stat-label">Recommend</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">4.8</span>
+                                    <span class="course-stat-label">Rating</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 96%"></div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-badge">
+                                    <i class="fas fa-star"></i> Top Recommended
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-connections">
+                        <h4 class="mentor-section-title">
+                            <i class="fas fa-user-friends"></i> Your Mentors Who Took This Course
+                        </h4>
+                        <div class="mentor-list">
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">JS</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Jessica Smith</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">MR</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Michael Rodriguez</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">AC</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Alex Chen</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-play-circle"></i> In Progress
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <div class="course-duration">
+                            <i class="far fa-clock"></i> Estimated: 6 weeks at 8 hrs/week
+                        </div>
+                        <button class="btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="course-card" data-category="databases">
+                    <div class="course-card-header">
+                        <div class="course-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="course-info">
+                            <span class="course-level">Intermediate</span>
+                            <h3 class="course-title">Database Design & Optimization</h3>
+                            <div class="course-provider">By Data Masters • 32 hours</div>
+                            <p class="course-description">
+                                Learn to design, implement, and optimize both SQL and NoSQL databases for high-performance applications.
+                            </p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <span class="course-stat-value">87</span>
+                                    <span class="course-stat-label">Mentors Taken</span>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">88%</span>
+                                    <span class="course-stat-label">Recommend</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 88%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">4.6</span>
+                                    <span class="course-stat-label">Rating</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-badge">
+                                    <i class="fas fa-star"></i> Highly Recommended
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-connections">
+                        <h4 class="mentor-section-title">
+                            <i class="fas fa-user-friends"></i> Your Mentors Who Took This Course
+                        </h4>
+                        <div class="mentor-list">
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">JS</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Jessica Smith</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">TP</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Taylor Park</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <div class="course-duration">
+                            <i class="far fa-clock"></i> Estimated: 4 weeks at 8 hrs/week
+                        </div>
+                        <button class="btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="course-card" data-category="apis">
+                    <div class="course-card-header">
+                        <div class="course-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="course-info">
+                            <span class="course-level">Intermediate</span>
+                            <h3 class="course-title">REST API Development with Node.js</h3>
+                            <div class="course-provider">By Web Dev Pro • 38 hours</div>
+                            <p class="course-description">
+                                Build secure, scalable RESTful APIs using Node.js, Express, and modern authentication techniques.
+                            </p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <span class="course-stat-value">103</span>
+                                    <span class="course-stat-label">Mentors Taken</span>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">95%</span>
+                                    <span class="course-stat-label">Recommend</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">4.9</span>
+                                    <span class="course-stat-label">Rating</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 98%"></div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-badge">
+                                    <i class="fas fa-star"></i> Top Recommended
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-connections">
+                        <h4 class="mentor-section-title">
+                            <i class="fas fa-user-friends"></i> Your Mentors Who Took This Course
+                        </h4>
+                        <div class="mentor-list">
+                            <div class="mentor-item">
+                                <div class="mentor-avatar">MR</div>
+                                <div class="mentor-info">
+                                    <span class="mentor-name">Michael Rodriguez</span>
+                                    <span class="mentor-status">
+                                        <i class="fas fa-check-circle"></i> Completed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <div class="course-duration">
+                            <i class="far fa-clock"></i> Estimated: 5 weeks at 8 hrs/week
+                        </div>
+                        <button class="btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course 4 -->
+                <div class="course-card" data-category="devops">
+                    <div class="course-card-header">
+                        <div class="course-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="course-info">
+                            <span class="course-level">Advanced</span>
+                            <h3 class="course-title">Backend DevOps & Deployment</h3>
+                            <div class="course-provider">By Cloud Experts • 52 hours</div>
+                            <p class="course-description">
+                                Master deployment strategies, containerization with Docker, orchestration with Kubernetes, and CI/CD pipelines.
+                            </p>
+                            <div class="course-stats">
+                                <div class="course-stat">
+                                    <span class="course-stat-value">64</span>
+                                    <span class="course-stat-label">Mentors Taken</span>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">85%</span>
+                                    <span class="course-stat-label">Recommend</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-stat">
+                                    <span class="course-stat-value">4.7</span>
+                                    <span class="course-stat-label">Rating</span>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="width: 94%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mentor-connections">
+                        <h4 class="mentor-section-title">
+                            <i class="fas fa-user-friends"></i> Your Mentors Who Took This Course
+                        </h4>
+                        <div class="mentor-list">
+                            <div class="no-mentors">
+                                None of your current mentors have taken this course yet.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <div class="course-duration">
+                            <i class="far fa-clock"></i> Estimated: 7 weeks at 8 hrs/week
+                        </div>
+                        <button class="btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">MenteeConnect</h3>
+                    <p>Your pathway to career success through mentorship and structured learning.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Career Paths</a></li>
+                        <li><a href="#">Find a Mentor</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="#">Learning Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 MenteeConnect. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter courses by category
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide course cards based on filter
+                    courseCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Enroll button functionality
+            const enrollButtons = document.querySelectorAll('.btn-enroll');
+            
+            enrollButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const courseTitle = this.closest('.course-card').querySelector('.course-title').textContent;
+                    
+                    // In a real application, this would redirect to enrollment or show a modal
+                    alert(`Enrolling in: ${courseTitle}\n\nThis would redirect you to the enrollment page in a real application.`);
+                    
+                    // You could also trigger a modal or redirect:
+                    // window.location.href = '/enroll?course=' + encodeURIComponent(courseTitle);
+                });
+            });
+            
+            // Start Learning Path button
+            const startPathBtn = document.querySelector('.btn-primary');
+            
+            startPathBtn.addEventListener('click', function() {
+                // In a real application, this would start the learning path
+                alert('Starting the Backend Developer Learning Path!\n\nYou will be guided through the recommended course sequence.');
+                
+                // You could also track this event and redirect to the first course
+                // window.location.href = '/learning-path/backend-developer/start';
+            });
+            
+            // Mentor item click functionality
+            const mentorItems = document.querySelectorAll('.mentor-item');
+            
+            mentorItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const mentorName = this.querySelector('.mentor-name').textContent;
+                    
+                    // In a real application, this would show mentor details or start a conversation
+                    alert(`Viewing mentor profile: ${mentorName}\n\nThis would open the mentor's profile page in a real application.`);
+                });
+            });
+            
+            // Simulate course recommendation calculation
+            function calculateRecommendationPercentage(courseElement) {
+                // In a real application, this would come from an API
+                // For demo purposes, we'll just use the existing percentage
+                const recommendElement = courseElement.querySelector('.course-stat:nth-child(2) .course-stat-value');
+                return parseInt(recommendElement.textContent);
+            }
+            
+            // Sort courses by recommendation percentage (optional feature)
+            const sortByRecommendationBtn = document.createElement('button');
+            sortByRecommendationBtn.className = 'filter-btn';
+            sortByRecommendationBtn.textContent = 'Sort by Recommendation';
+            
+            sortByRecommendationBtn.addEventListener('click', function() {
+                const coursesContainer = document.querySelector('.courses-grid');
+                const courses = Array.from(coursesContainer.querySelectorAll('.course-card'));
+                
+                // Sort courses by recommendation percentage (descending)
+                courses.sort((a, b) => {
+                    const aRec = calculateRecommendationPercentage(a);
+                    const bRec = calculateRecommendationPercentage(b);
+                    return bRec - aRec;
+                });
+                
+                // Re-append courses in sorted order
+                courses.forEach(course => {
+                    coursesContainer.appendChild(course);
+                });
+                
+                alert('Courses sorted by recommendation percentage!');
+            });
+            
+            // Add the sort button to the filter section
+            document.querySelector('.courses-filter').appendChild(sortByRecommendationBtn);
+        });
+    </script>
+</body>
+</html>
